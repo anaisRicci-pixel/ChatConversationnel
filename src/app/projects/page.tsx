@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AlignJustify, Plus, X, FolderOpen } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -18,6 +19,7 @@ import {
 /* ─── Page ───────────────────────────────────────────────────────── */
 
 export default function ProjectsPage() {
+  const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
   const [bannerDismissed, setBannerDismissed] = useState(false);
@@ -73,6 +75,7 @@ export default function ProjectsPage() {
                 onClose={() => setNavOpen(false)}
                 pinnedItems={PINNED_ITEMS}
                 recentItems={RECENT_ITEMS}
+                onNewDiscussion={() => { setNavOpen(false); router.push("/home"); }}
               />
             </SheetContent>
           </Sheet>
@@ -172,6 +175,7 @@ export default function ProjectsPage() {
           pinnedItems={PINNED_ITEMS}
           recentItems={RECENT_ITEMS}
           activeSection="projets"
+          onNewDiscussion={() => router.push("/home")}
           className="relative z-10"
         />
 

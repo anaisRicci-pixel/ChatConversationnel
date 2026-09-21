@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AlignJustify, Plus, Mic, BookMarked } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -17,6 +18,7 @@ import {
 /* ─── Page ───────────────────────────────────────────────────────── */
 
 export default function HomePage() {
+  const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [llmMode, setLlmMode] = useState<"rapide" | "avancé">("rapide");
 
@@ -52,6 +54,7 @@ export default function HomePage() {
                 onClose={() => setNavOpen(false)}
                 pinnedItems={PINNED_ITEMS}
                 recentItems={RECENT_ITEMS}
+                onProjectsClick={() => { setNavOpen(false); router.push("/projects"); }}
               />
             </SheetContent>
           </Sheet>
@@ -147,6 +150,7 @@ export default function HomePage() {
           pinnedItems={PINNED_ITEMS}
           recentItems={RECENT_ITEMS}
           activeItemId="c2"
+          onProjectsClick={() => router.push("/projects")}
           className="relative z-10"
         />
 
